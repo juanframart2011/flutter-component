@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_component/src/pages/alert_page.dart';
 import 'package:flutter_component/src/providers/menu_provider.dart';
+import 'package:flutter_component/src/utils/icono_string_util.dart';
 
 class HomePage extends StatelessWidget{
 
@@ -16,37 +18,45 @@ class HomePage extends StatelessWidget{
 
   Widget _lista(){
 
-    print( menuProvider.opciones );
+    //print( menuProvider.opciones );
+    /*menuProvider.cargarData().then((opciones) {
+      print('Opciones: $opciones');
+    });*/
 
-    return ListView(
-      children: _listaItems(),
+    return FutureBuilder(
+      future: menuProvider.cargarData(),
+      initialData: [],
+      builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
+        return ListView(
+          children: _listaItems( snapshot.data!, context ),
+        );
+      },
     );
+
+    /*return ListView(
+      children: _listaItems(),
+    );*/
   }
 
-  List<Widget> _listaItems(){
+  List<Widget> _listaItems( List<dynamic> data, context ){
 
-    return [
-      ListTile(
-        title: const Text('Alert Dialog'),
-        trailing: const Icon(Icons.arrow_forward_ios),
+    final List<Widget> opciones = [];
+
+    data.forEach((opt) {
+      final widgetTemp = ListTile(
+        title: Text( opt['texto'] ),
+        subtitle: Text( opt['ruta'] ),
+        leading: getIcon(opt['icon']),
+        trailing: const Icon( Icons.keyboard_arrow_right, color: Colors.blue ),
         onTap: (){
-          //Navigator.pushNamed(context, 'alert');
+          final routeName = opt['ruta'];
+          Navigator.pushNamed(context, routeName);
         },
-      ),
-      ListTile(
-        title: const Text('Animated Container'),
-        trailing: const Icon(Icons.arrow_forward_ios),
-        onTap: (){
-          //Navigator.pushNamed(context, 'animatedContainer');
-        },
-      ),
-      ListTile(
-        title: const Text('Card Widget'),
-        trailing: const Icon(Icons.arrow_forward_ios),
-        onTap: (){
-          //Navigator.pushNamed(context, 'card');
-        },
-      ),
-    ];
+      );
+
+      opciones..add( widgetTemp )..add( Divider() );      
+    });
+
+    return opciones;
   }
 }

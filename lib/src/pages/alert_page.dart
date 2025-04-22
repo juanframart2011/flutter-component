@@ -11,6 +11,10 @@ class AlertPage extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           child: const Text('Mostrar Alerta'),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.blue,
+            shape: const StadiumBorder(),
+          ),
           onPressed: () => _mostrarAlerta(context),
         ),
       ),
@@ -23,13 +27,24 @@ class AlertPage extends StatelessWidget {
     );
   }
 
-  _mostrarAlerta(context){
+  _mostrarAlerta(BuildContext context) {
     showDialog(
       context: context,
+      barrierDismissible: false,
       builder: (context) {
         return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
           title: const Text('Titulo'),
-          content: const Text('Contenido de la alerta'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              const Text('Este es el contenido de la alerta'),
+              const SizedBox(height: 20.0),
+              const FlutterLogo(size: 100.0),
+            ],
+          ),
           actions: <Widget>[
             TextButton(
               child: const Text('Cancelar'),

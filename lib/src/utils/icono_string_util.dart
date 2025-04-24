@@ -19,6 +19,8 @@ final _icons = <String, IconData>{
   'add_shopping_cart': Icons.add_shopping_cart,
   'folder_open': Icons.folder_open,
   'folder_shared': Icons.folder_shared,
+  'donut_large': Icons.donut_large,
+  'input': Icons.input,
 };
 
 Icon getIcon( String nombreIcono ){

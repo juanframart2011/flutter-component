@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_component/src/pages/home_page.dart';
 import 'package:flutter_component/src/routes/routes.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 //import 'package:flutter_component/src/pages/home_temp.dart';
 
 void main() => runApp(const MyApp());
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,
       title: 'Componente App',
       //home: HomePage(),
       initialRoute: '/',
@@ -21,6 +22,14 @@ class MyApp extends StatelessWidget {
           builder: (context) => HomePage(),
         );
       },
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('es', 'ES'),
+        Locale('en', 'US'),
+      ],
     );
   }
 }

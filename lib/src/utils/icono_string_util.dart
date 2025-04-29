@@ -21,6 +21,7 @@ final _icons = <String, IconData>{
   'folder_shared': Icons.folder_shared,
   'donut_large': Icons.donut_large,
   'input': Icons.input,
+  'list': Icons.list,
 };
 
 Icon getIcon( String nombreIcono ){
